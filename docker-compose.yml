@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 version: '3.8'  # バージョンの指定を追加
+=======
+version: '3.8'
+>>>>>>> cf83c3a (最初のコミット)
 
 services:
   nginx:
     container_name: curriculum-nginx
     image: nginx:latest
+<<<<<<< HEAD
     platform: linux/amd64  # Mac M1用のプラットフォーム指定
+=======
+    platform: linux/amd64
+>>>>>>> cf83c3a (最初のコミット)
     volumes:
       - ./docker/nginx:/etc/nginx/conf.d
       - ./app:/var/www/html
@@ -12,10 +20,17 @@ services:
       - "80:80"
     depends_on:
       - php
+<<<<<<< HEAD
   
   php:
     container_name: curriculum-laravel
     platform: linux/amd64  # Mac M1用のプラットフォーム指定
+=======
+
+  php:
+    container_name: curriculum-laravel
+    platform: linux/amd64
+>>>>>>> cf83c3a (最初のコミット)
     build:
       context: ./
       dockerfile: docker/php/Dockerfile
@@ -26,11 +41,19 @@ services:
       - "9000"
     depends_on:
       - db
+<<<<<<< HEAD
   
   db:
     container_name: curriculum-db
     image: mysql:8.0
     platform: linux/amd64  # Mac M1用のプラットフォーム指定
+=======
+
+  db:
+    container_name: curriculum-db
+    image: mysql:5.7
+    platform: linux/amd64
+>>>>>>> cf83c3a (最初のコミット)
     environment:
       MYSQL_ROOT_PASSWORD: root
       TZ: 'Asia/Tokyo'
@@ -38,6 +61,7 @@ services:
       - ./db:/var/lib/mysql
     restart: always
     ports:
+<<<<<<< HEAD
       - "3306:3306"
   
   phpMyAdmin:
@@ -52,5 +76,20 @@ services:
       - db
     ports:
       - "4040:80"
+=======
+      - 3306:3306
+
+  phpMyAdmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/amd64
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    links:
+      - db
+    ports:
+      - 4040:80
+>>>>>>> cf83c3a (最初のコミット)
     volumes:
       - ./phpmyadmin/sessions:/sessions
